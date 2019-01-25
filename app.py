@@ -14,9 +14,15 @@ length = len(df)
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/",methods=["POST"])
 def home():
     return render_template("index.html.j2")
+
+
+# @app.route("/",methods=["POST"])
+# def home():
+#     text = request.form.get('textbox')
+#     return render_template("index.html.j2")
 
 
 @app.route("/bokehplot")
@@ -43,6 +49,10 @@ def dfcustom():
     print(headers)
     return render_template("dfcustom.html.j2", data=data, headers=headers)
 
+@app.route('/textpage', methods=["POST"])
+def some_function():
+    text = request.form.get('textbox')
+    return render_template("textpage.html.j2")
 
 if __name__ == "__main__":
     app.run(debug=True, port=5957)
